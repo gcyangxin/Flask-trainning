@@ -1,0 +1,38 @@
+{% extends 'index.html'%}
+{% from 'macro/macroTemplate.html' import my_pagination%}
+
+{%block body%}
+
+
+<div class="selfcolumn">
+        <div id="title">
+            <h2>关于我</h2>
+        </div>
+        <div id="avatararea">
+             <button onclick="changeDisply('avatarup')" type="button" style="float:right;">Modify</button>
+             <img src="{{config['USER_AVATAR']}}{{query.avatar | default('default.jpg',True)}}">
+            <form id="avatarup" method="post" enctype="multipart/form-data">
+                {{form.avatar}}{{form.submit_avatar}}
+            </form>
+            <p>{% for error in myvalidator.errors %} {{error}}{% endfor %}</p>
+        </div>
+
+        <div id="detail">
+            <button onclick="changeDisply('mysign')" type="button" style="float:right;">Modify</button>
+            <p> <b>用户名：</b>{{query.name}}</p>
+            <p> <b>邮箱：</b>{{query.email}}</p>
+            <p> <b>注册时间：</b>{{query.register_time}}</p>
+            <p> <b>个性签名：</b>{{query.about_me}}</p>
+            <form id="mysign" method="post" style="display:none;">
+                {{form.hidden_tag() }}
+                {{form.text}}{{form.submit}}
+                 {{form.cancel}}<p>{% for error in form.text.errors %} {{error}}{% endfor %}</p>
+            </form>
+
+        </div>
+
+<h2>我已发送{{pagination.total}}条状态</h2>
+{% include '_post.html'%}
+{{my_pagination(pagination,'blog.profile')}}
+</div>
+{%endblock body%}

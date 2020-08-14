@@ -1,0 +1,17 @@
+{%extends 'index.html'%}
+{%block header%}
+{{super()}}
+{%endblock%}
+{%block body%}
+
+<div class="login">
+  <form action="" method="post">
+     {{ form.hidden_tag() }}
+     UserName: {{form.name()}}<p>{% for error in form.name.errors %} {{error}}{% endfor %}</p>
+       E-mail: {{form.email()}}<p>{% for error in form.email.errors %}{{error}} {% endfor %}</p>
+    PassWords: {{form.passwd()}}<p>{% for error in form.passwd.errors %}{{error}} {% endfor %}</p>
+    PassWords: {{form.passwd2()}}<P>{% for error in form.passwd2.errors %}{{error}} {% endfor %}</P>
+    {{form.submit()}}
+  </form>
+</div>
+{%endblock%}

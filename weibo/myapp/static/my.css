@@ -1,0 +1,271 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    max-width: 50%;
+    margin: 0;
+    padding: 0;
+    background-color:#a27954;
+    font-family:Arial,"Times New Roman";
+
+}
+
+#topnav{
+    background-color:#755e02;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+
+}
+#posts{
+    margin-top:80px;
+}
+
+#topnav a{
+    text-decoration: none;
+    padding: 25px 25px;
+    color: white;
+    float: left;
+    display: block;
+    text-align: center;
+    font-weight: 600;
+
+}
+#topnav a:hover{
+    background-color: #f1f1f1;
+    color: #333;
+}
+#topnav:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#welcome,#flash{
+    padding: 25px 20px;
+    margin-top: 80px;
+    border-radius: 10px;
+}
+#clickme {
+    text-decoration: none;
+    color: blue;
+}
+.login{
+    width: 50%;
+    background-color: #f1f1f1;
+    padding:20px;
+    margin: 80px;
+    border: 3px solid #ddd;
+    border-radius: 5px;
+    text-align: left;
+
+}
+.login input{
+    display: inline-block;
+}
+[type=submit],[type=button],#avatar{
+    border: 3px solid #ddd;
+    color: black;
+    background-color: #aaa;
+
+}
+[type=submit]:hover{
+    cursor: pointer;
+}
+#avatar{
+    display: block;
+}
+#avatarup{
+    display: none;
+}
+div#title{
+    text-align: center;
+    padding: 25px;
+}
+.selfcolumn{
+    margin-top: 80px;
+    padding: 20px;
+}
+#avatararea,.post,.send,#detail{
+    background-color: #eee9e9;
+    padding: 20px;
+    margin: 15px;
+    border-radius: 20px;
+    text-align: left;
+    border: 4px solid #ddd;
+
+}
+/* .post{
+    overflow: hidden;
+
+} */
+.post p {
+    max-width: 100%;
+    text-indent: 20px;
+
+
+}
+.postmore{
+    text-decoration: none;
+    color: grey;
+    padding: 15px;
+    display: block;
+    margin: 15px;
+    text-align: center;
+}
+.postmore:hover{
+    background-color: #ddd;
+}
+
+
+.send textarea,#mysign textarea,.newComment textarea{
+    width: 100%;
+    height: 100px;
+    resize: none;
+    border: 3px solid #aaa;
+    display:block;
+
+}
+#avatararea img{
+    height: 200px;
+    width: 200px;
+}
+
+
+.meeageStatus{
+    padding: 10px;
+}
+.meeageStatus img{
+    width: 50px;
+    height: 50px;
+
+}
+
+.thumb,.commentsCount{
+    text-decoration:none;
+    padding:5px;
+    font-size:20px;
+    color:black;
+}
+.thumbIcon{
+    width:25px;
+    height:25px;
+}
+.commentArea{
+    padding: 10px;
+
+}
+.commentsCount{
+    display: inline-block;
+    cursor: pointer;
+}
+.commentsCount img{
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.newComment{
+    display:none;
+}
+
+
+textarea{
+    font-size: 1.2em;
+}
+
+.sentComment ul{
+    list-style-type: none;
+    padding-left: 5px;
+    margin: 5px;
+    max-width: 100%;
+    text-align: left top;
+
+
+}
+.sentComment li{
+    padding: 8px;
+    font-size: 1em;
+    outline: 3px solid #aaa7a7;
+    margin-bottom: 8px;
+    display: block;
+    white-space: normal;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+.commentFlex{
+    display: flex;
+    justify-content:space-between !important;
+}
+.sentComment li:hover{
+    background-color: #ddd;
+    cursor: pointer;
+}
+.sentComment b{
+    font-size: 1em;
+}
+
+
+.sentComment img{
+    height:30px;
+    width: 30px;
+}
+.sentComment .userName{
+    text-decoration: none;
+    color: #8888b5;
+}
+.posttext{
+    margin: 0px;
+}
+
+.footer{
+    text-align: left;
+
+
+}
+.pagination{
+    display: -webkit-flex;
+    display: flex;
+    list-style-type: none;
+
+
+}
+.page-item{
+    font-size: 1.2em;
+
+}
+.page-link{
+    color: black;
+    display: inline-block;
+    padding: 15px;
+    background-color:white;
+    text-decoration: none;
+    border: 1px solid #dee2e6;
+
+}
+.page-link:hover{
+    background-color: #ddd;
+    cursor: pointer;
+
+
+}
+.page-item.active a{
+    text-decoration: underline;
+    font-weight: 900;
+
+}
+small{
+    color: grey;
+}
+.flask-moment{
+    display: inline;
+}
+
+
+/* if device screnn <1200,will run */
+@media screen and (max-width:1200px){
+    body{
+        max-width: 100%;
+    }
+
+}

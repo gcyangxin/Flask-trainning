@@ -1,10 +1,9 @@
-# Flask-Learnning
-## CONTENT
-1. 纯文字微博
+### 纯文字微博
+
     #### Installation
     ```
-    $ git clone https://github.com/gcyangxin/Flask-trainning.git
-    $ cd weibo
+    $ git clone https://github.com/Flask-Learnning/weibo.git
+    $ cd bluelog
     ```
     #### dependency
     ```

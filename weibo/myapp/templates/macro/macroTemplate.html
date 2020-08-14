@@ -1,0 +1,120 @@
+{%macro my_pagination(pagination,endpoint)%}
+<nav calss="footer">
+    <ul class="pagination">
+        {% if pagination.has_prev %}
+            <li class="page-item active">
+                <a class="page-link" href="{{url_for(endpoint,page=pagination.page-1)}}#posts">Pre</a>
+            </li>
+        {%else%}
+             <li class="page-item disable">
+                <a class="page-link" href="##" >Pre</a>
+            </li>
+        {%endif%}
+        {% for page in pagination.iter_pages(3,1,1,2)%}
+            {% if page%}
+             <li class="page-item {%if page== pagination.page%}active{%endif%}">
+                <a class="page-link" href="{{url_for(endpoint,page=page)}}">{{page}}</a>
+            </li>
+            {%else%}
+            <li class="page-item disable">
+                <a class="page-link" href="{{url_for(endpoint,page=loop.index)}}">...</a>
+            </li>
+            {%endif%}
+        {%endfor%}
+         {% if pagination.has_next %}
+            <li class="page-item active">
+                <a class="page-link" href="{{url_for(endpoint,page=pagination.page+1)}}#posts">Next</a>
+            </li>
+          {%else%}
+             <li class="page-item disable">
+                <a class="page-link" href="##">Next</a>
+            </li>
+         {%endif%}
+    </ul>
+</nav>
+{%- endmacro%}
+
+{%macro showComment(all_comments,post)%}
+{% for comment in all_comments%}
+    {% with user=post.user.query.get(comment.user_id) %}
+        {% if comment.parent_id== comment.post_id%}
+            <li id="comment_{{comment.id}}" username='{{user.name}}' onclick="createReplyRect(this)">
+                <div class="commentFlex">
+                    <table>
+                        <tr>
+                            <td>
+                                <img src="{{config['USER_AVATAR']}}{{user.avatar | default('default.jpg',True)}}">
+                            </td>
+                            <td>
+                                <a >{{user.name}}</a>
+                            </td>
+
+                        </tr>
+                    </table>
+
+                     <small>{{moment(comment.send_time,local=True).fromNow()}}</small>
+                </div>
+               <p class="posttext">{{comment.comment_body}}</p>
+           </li>
+        {%else%}
+            <li id="comment_{{comment.id}}" username='{{user.name}}' onclick="createReplyRect(this)">
+                 <div class="commentFlex">
+                    <table>
+                        <tr>
+                            <td>
+                                <img src="{{config['USER_AVATAR']}}{{user.avatar | default('default.jpg',True)}}">
+                            </td>
+                            <td>
+                                <a >{{user.name}} </a><b id="reply">Reply</b>
+                            </td>
+                            <td>
+                                <a>
+                                    {{post.user.query.get(comment.query.get(comment.parent_id).user_id).name}}:
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                    <small>{{moment(comment.send_time,local=True).fromNow()}}</small>
+                </div>
+               <p class="posttext">{{comment.comment_body | striptags}}</p>
+           </li>
+        {%endif%}
+    {%endwith%}
+{%endfor%}
+{%- endmacro%}
+
+{%macro comment_PGN(pagination,endpoint,loc)%}
+<nav calss="footer">
+    <ul class="pagination">
+        {% if pagination.has_prev %}
+            <li class="page-item active">
+                <a class="page-link" href="{{url_for(endpoint,page=pagination.page-1,loc=loc,post_id=post.id)}}#posts">Pre</a>
+            </li>
+        {%else%}
+             <li class="page-item disable">
+                <a class="page-link" href="##" >Pre</a>
+            </li>
+        {%endif%}
+        {% for page in pagination.iter_pages(3,1,1,2)%}
+            {% if page%}
+             <li class="page-item {%if page== pagination.page%}active{%endif%}">
+                <a class="page-link" href="{{url_for(endpoint,page=page,loc=loc,post_id=post.id)}}">{{page}}</a>
+            </li>
+            {%else%}
+            <li class="page-item disable">
+                <a class="page-link" href="{{url_for(endpoint,page=loop.index,loc=loc,post_id=post.id)}}">...</a>
+            </li>
+            {%endif%}
+        {%endfor%}
+         {% if pagination.has_next %}
+            <li class="page-item active">
+                <a class="page-link" href="{{url_for(endpoint,page=pagination.page+1,loc=loc,post_id=post.id)}}#posts">Next</a>
+            </li>
+          {%else%}
+             <li class="page-item disable">
+                <a class="page-link" href="##">Next</a>
+            </li>
+         {%endif%}
+    </ul>
+</nav>
+{%- endmacro%}
