@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <title>{%block header%}{%endblock%}</title>
         <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='my.css')}}">
+        <script src="/static/jquery.min.js"> </script>
         <script type="text/javascript" src="{{url_for('static',filename='my.js')}}"></script>
 
         {{moment.include_jquery(local_js='/static/jquery.min.js')}}

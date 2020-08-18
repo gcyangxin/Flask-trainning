@@ -9,7 +9,10 @@ body{
     font-family:Arial,"Times New Roman";
 
 }
-
+a{
+    text-decoration: none;
+    color: black;
+}
 #topnav{
     background-color:#755e02;
     position: fixed;
@@ -75,9 +78,7 @@ body{
 #avatar{
     display: block;
 }
-#avatarup{
-    display: none;
-}
+
 div#title{
     text-align: center;
     padding: 25px;
@@ -95,10 +96,7 @@ div#title{
     border: 4px solid #ddd;
 
 }
-/* .post{
-    overflow: hidden;
 
-} */
 .post p {
     max-width: 100%;
     text-indent: 20px;
@@ -118,7 +116,7 @@ div#title{
 }
 
 
-.send textarea,#mysign textarea,.newComment textarea{
+.send textarea,#mysign textarea,.newComment textarea,#text{
     width: 100%;
     height: 100px;
     resize: none;
@@ -259,6 +257,36 @@ small{
 }
 .flask-moment{
     display: inline;
+}
+
+.dropdown-menu{
+    list-style-type: none;
+
+}
+
+.threeCircle{
+    float: right;
+}
+.threeCircle svg{
+    height:10px;
+    width:24px;
+    stroke-width:1px;
+    display: block;
+    float: right;
+}
+.threeCircle ul{
+    padding: 0;
+    position: relative;
+    padding: 5px;
+    display: none;
+    border: 1px solid #ccc;
+
+}
+.threeCircle ul:hover{
+    background-color: #0366d6;
+
+    color: white;
+    cursor: pointer;
 }
 
 

@@ -9,21 +9,21 @@
             <h2>关于我</h2>
         </div>
         <div id="avatararea">
-             <button onclick="changeDisply('avatarup')" type="button" style="float:right;">Modify</button>
+             <button id="btn-avatar" type="button" style="float:right;">Modify</button>
              <img src="{{config['USER_AVATAR']}}{{query.avatar | default('default.jpg',True)}}">
-            <form id="avatarup" method="post" enctype="multipart/form-data">
+            <form id="frm-avatar" method="post" enctype="multipart/form-data" style="display:none;">
                 {{form.avatar}}{{form.submit_avatar}}
             </form>
             <p>{% for error in myvalidator.errors %} {{error}}{% endfor %}</p>
         </div>
 
         <div id="detail">
-            <button onclick="changeDisply('mysign')" type="button" style="float:right;">Modify</button>
+            <button  id="btn-detail" type="button" style="float:right;">Modify</button>
             <p> <b>用户名：</b>{{query.name}}</p>
             <p> <b>邮箱：</b>{{query.email}}</p>
             <p> <b>注册时间：</b>{{query.register_time}}</p>
             <p> <b>个性签名：</b>{{query.about_me}}</p>
-            <form id="mysign" method="post" style="display:none;">
+            <form id="frm-detail" method="post" style="display:none;">
                 {{form.hidden_tag() }}
                 {{form.text}}{{form.submit}}
                  {{form.cancel}}<p>{% for error in form.text.errors %} {{error}}{% endfor %}</p>

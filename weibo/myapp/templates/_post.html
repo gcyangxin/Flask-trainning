@@ -1,6 +1,16 @@
 <div id="posts" class="posts">
 {%for post in posts%}
         <div id="post_{{post.id}}" class="post">
+            <div class="threeCircle" >
+                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                        <circle cx="3" cy="3" r="3" />
+                        <circle cx="10" cy="3" r="3" />
+                        <circle cx="17" cy="3" r="3"/>
+                 </svg>
+                <ul class="dropdown-menu">
+                    <li class="delete"><a href="{{url_for('blog.delete_post',post_id=post.id,loc=loc)}}">delete</a></li>
+                </ul>
+            </div>
 
             <div class="meeageStatus">
                 <table>
@@ -17,6 +27,7 @@
             <div class="commentArea">
 {#thumb#}        {% include 'thumb.html'%}
                 {% include 'commentCount.html'%}
+
             </div>
             <div class="newComment">
                <form action="{{url_for('blog.new_comment',loc=loc,post_id=post.id,parent_id=post.id)}}" method="post">

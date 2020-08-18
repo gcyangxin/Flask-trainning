@@ -94,8 +94,8 @@ def new_message():
 
 
 
-@blog_bp.route('/<loc>/newreply/<int:post_id>/<int:parent_id>',methods=['POST','GET'])
-@blog_bp.route('/<loc>/newcomment/<int:post_id>/<int:parent_id>',methods=['POST','GET'])
+@blog_bp.route('/<loc>/newreply/post/<int:post_id>/parent/<int:parent_id>',methods=['POST','GET'])
+@blog_bp.route('/<loc>/newcomment/post/<int:post_id>/parent/<int:parent_id>',methods=['POST','GET'])
 @login_required
 def new_comment(post_id,parent_id,loc):
 
@@ -113,7 +113,7 @@ def new_comment(post_id,parent_id,loc):
 
 
 
-@blog_bp.route('/<loc>/showpost/<int:post_id>',methods=['POST','GET'])
+@blog_bp.route('/<loc>/post/<int:post_id>',methods=['POST','GET'])
 @login_required
 def show_post(post_id,loc):
     '''readmore'''
@@ -132,8 +132,8 @@ def show_post(post_id,loc):
                             loc=loc,
                             page=page
                             )
-@blog_bp.route('/<loc>/posts/<int:post_id>/thumb',methods=['GET'])
-@blog_bp.route('/posts/<int:post_id>/thumb',methods=['GET'])
+@blog_bp.route('/<loc>/post/<int:post_id>/thumb',methods=['GET'])
+@blog_bp.route('/post/<int:post_id>/thumb',methods=['GET'])
 @login_required
 def thumbup(post_id,loc):
     '''
@@ -151,3 +151,25 @@ def thumbup(post_id,loc):
         db.session.commit()
 
     return redirect(url_for('blog.{}'.format(loc),page=page,post_id=post_id,loc=loc))
+
+@blog_bp.route('/post/<int:post_id>/comment/<int:comment_id>/delete', methods=['GET'])
+@login_required
+def delete_comment(loc,comment_id):
+    comment = Comment.query.get_or_404(comment_id)
+    db.session.delete(comment)
+    db.session.commit()
+    flash('Comment deleted.')
+    return redirect(url_for('blog.show_post',page=page,post_id=post_id))
+
+@blog_bp.route('/<loc>/post/<int:post_id>/delete', methods=['GET'])
+@login_required
+def delete_post(loc,post_id):
+    page=request.args.get('page',1,type=int)
+    post = Post.query.get_or_404(post_id)
+    db.session.delete(post)
+    db.session.commit()
+    flash('Post deleted.')
+    if loc=='show_post':
+        return redirect(url_for('blog.index',page=page))
+    return redirect(url_for('blog.{}'.format(loc),page=page))
+

@@ -62,8 +62,20 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     send_time=db.Column(db.DateTime,default=datetime.now())
     body=db.Column(db.String(128))
-    post_like_person_ids=db.relationship('PostLike',backref='post',lazy='dynamic',foreign_keys='PostLike.post_id')
-    all_comments=db.relationship('Comment',backref='post',lazy='dynamic',foreign_keys='Comment.post_id')#class.filed to assignment
+    post_like_person_ids=db.relationship('PostLike',
+                                         backref='post',
+                                         lazy='dynamic',
+                                         foreign_keys='PostLike.post_id',
+                                         cascade="all, delete-orphan",
+                                         passive_deletes=True
+                                         )
+    all_comments=db.relationship('Comment',
+                                 backref='post',
+                                 lazy='dynamic',
+                                 foreign_keys='Comment.post_id', #class.filed to assignment
+                                 cascade="all, delete-orphan",
+                                 passive_deletes=True
+                                 )
 
 
     def __init__(self,user_id,body):
@@ -76,8 +88,8 @@ class Post(db.Model):
 class PostLike(db.Model):
     __tablename__='post_likes'
     id=db.Column(db.Integer,primary_key=True,autoincrement=True)
-    post_id=db.Column(db.Integer,db.ForeignKey('post.id'))
-    user_id=db.Column(db.Integer,db.ForeignKey('user.id'))
+    post_id=db.Column(db.Integer,db.ForeignKey('post.id',ondelete='CASCADE'))
+    user_id=db.Column(db.Integer,db.ForeignKey('user.id',ondelete='CASCADE'))
 
     def __init__(self,post_id,user_id):
         self.post_id=post_id
@@ -90,10 +102,10 @@ class Comment(db.Model):
     __tablename__='comments'
 
     id=db.Column(db.Integer,primary_key=True,autoincrement=True)
-    user_id=db.Column(db.Integer,db.ForeignKey('user.id'))
+    user_id=db.Column(db.Integer,db.ForeignKey('user.id',ondelete='CASCADE'))
     send_time = db.Column(db.DateTime,default=datetime.now())
     comment_body=db.Column(db.Text)
-    post_id=db.Column(db.Integer,db.ForeignKey('post.id'))
+    post_id=db.Column(db.Integer,db.ForeignKey('post.id',ondelete='CASCADE'))
     parent_id=db.Column(db.Integer)#if it equals to comments.id that is relpy,otherwise comment
     comment_like_count=db.Column(db.Integer,default=0)
 

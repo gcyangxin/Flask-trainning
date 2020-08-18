@@ -38,7 +38,7 @@
 {% for comment in all_comments%}
     {% with user=post.user.query.get(comment.user_id) %}
         {% if comment.parent_id== comment.post_id%}
-            <li id="comment_{{comment.id}}" username='{{user.name}}' onclick="createReplyRect(this)">
+            <li id="comment_{{comment.id}}" class="comments" username='{{user.name}}'>
                 <div class="commentFlex">
                     <table>
                         <tr>
@@ -57,7 +57,7 @@
                <p class="posttext">{{comment.comment_body}}</p>
            </li>
         {%else%}
-            <li id="comment_{{comment.id}}" username='{{user.name}}' onclick="createReplyRect(this)">
+            <li id="comment_{{comment.id}}" class="replys" username='{{user.name}}'>
                  <div class="commentFlex">
                     <table>
                         <tr>
