@@ -1,5 +1,5 @@
 ### 纯文字微博
-
+![index](../Screenshot/profile.png)
 #### Installation
 ```
 $ git clone https://github.com/Flask-Learnning/weibo.git
