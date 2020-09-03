@@ -1,0 +1,6 @@
+{% set page=pagination | default({'page':'1'})%}
+<a class="thumb"  href="{{url_for('blog.thumbup',loc=loc,page=page.page,post_id=post.id,parent_id=post.parent_id)}}#post_{{post.id}}">
+    <img class="thumbIcon" src="{{config['THUMB_ICON']}}{{'thumb-2.jpg' if post.post_like_person_ids.filter_by(user_id=current_user.id).first() else 'thumb-1.jpg' }}" alt="赞">
+    {{post.post_like_person_ids.count()}}
+</a>
+

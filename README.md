@@ -2,7 +2,8 @@
 ## CONTENT
 
 ### 1. 纯文字微博 *[weibo](https://github.com/gcyangxin/Flask-trainning/tree/master/weibo)*
-### 2. Restful api *[restful](https://github.com/gcyangxin/Flask-trainning/tree/master/restful)*
+### 2. 微博升级版本(redis缓存，celery+redis异步邮件，gunicore gevent高并发,nginx+supervisor部署)*[weibo2](https://github.com/gcyangxin/Flask-trainning/tree/master/weibo2)*
+### 3. Restful api *[restful](https://github.com/gcyangxin/Flask-trainning/tree/master/restful)*
 
 #### Installation
 ```
@@ -28,7 +29,6 @@ python manager.py schema_create #createTables
 #### run
 ```python run.py```
 #### 可改进
-- 邮件功能
 - log功能
 - 404页面重写
 - 删改，注销

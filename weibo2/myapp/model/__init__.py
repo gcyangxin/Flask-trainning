@@ -1,0 +1,1 @@
+from .mydb import db,User,Post,Comment,PostLike

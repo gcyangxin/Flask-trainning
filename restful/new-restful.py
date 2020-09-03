@@ -53,7 +53,7 @@ class TaskApi(TasksApi):
     }
     def __init__(self):
         super(TaskApi,self).__init__()
-        self.reparse.args[0].required=False#modify title required
+        self.reparse.args[0].required=False#modify title required attr
 
     def get(self,id):
         task=if_exists_id(id)

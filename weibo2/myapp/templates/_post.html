@@ -1,0 +1,68 @@
+<div id="posts" class="posts">
+{%for post in posts%}
+        <div id="post_{{post.id}}" class="post">
+            <div class="threeCircle" >
+                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                        <circle cx="3" cy="3" r="3" />
+                        <circle cx="10" cy="3" r="3" />
+                        <circle cx="17" cy="3" r="3"/>
+                 </svg>
+                <ul class="dropdown-menu">
+                    <li class="delete"><a href="{{url_for('blog.delete_post',post_id=post.id,loc=loc)}}">delete</a></li>
+                </ul>
+            </div>
+
+            <div class="meeageStatus">
+                <table>
+                    <tr>
+                       <td rowspan="2"><img src="{{config['USER_AVATAR']}}{{ post.user.avatar | default('default.jpg',True)}}"></td>
+                        <td> <strong class="username">{{ post.user.name }}</strong>
+                    </tr>
+                    <tr>
+                        <td><small>{{moment(post.send_time,local=True).format('lll')}}</small></td>
+                    </tr>
+                </table>
+            <p class="posttext">{{ post.body|striptags }}</p>
+            </div>
+            <div class="commentArea">
+{#thumb#}        {% include 'thumb.html'%}
+                {% include 'commentCount.html'%}
+
+            </div>
+            <div class="newComment">
+               <form action="{{url_for('blog.new_comment',loc=loc,post_id=post.id,parent_id=post.id)}}" method="post">
+                   {{commentForm.comment}}{{commentForm.submit}}{{form.hidden_tag()}}
+               </form>
+                {% for error in commentForm.comment.errors %} {{error}}{% endfor %}
+            </div>
+            <div class="sentComment">
+ {#sent#}     <ul>
+                {%if flags !='hide'%}
+
+                    {%set comments_pg=post.all_comments.paginate(page=page,per_page=config['DETAIL_COMMNET_NUM'])%}
+                    {%set comments=comments_pg.items%}
+                    {{showComment(all_comments=comments,post=post)}}
+
+                {%else%}
+                    {%with limit=config['PER_PAGE_COMMENT_NUM']%}
+                        {{showComment(all_comments=post.all_comments.limit(limit),post=post)}}
+                    {%endwith%}
+                {%endif%}
+            </ul>
+            </div>
+                 {%if flags !='hide'%}
+                     {% from 'macro/macroTemplate.html' import comment_PGN with context%}
+                     {{comment_PGN(comments_pg,'blog.show_post',loc=loc)}}
+                 {%endif%}
+            <div >
+            {%if flags =='hide' and post.all_comments.count()>=config['PER_PAGE_COMMENT_NUM']%}
+                <a class="postmore" href="{{url_for('blog.show_post',parent_id=post.parent_id,post_id=post.id,loc=loc)}}">Read More</a>
+            {%endif%}
+            </div>
+
+        </div>
+
+{%endfor%}
+
+</div>
+

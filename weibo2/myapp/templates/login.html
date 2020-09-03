@@ -1,0 +1,14 @@
+{%extends 'index.html'%}
+{%block header%}
+{{super()}}
+{%endblock%}
+{%block body%}
+<div class="login">
+    <form action="" method="post">
+     {{ form.hidden_tag() }}
+    <p>UserName:</p><p>{{form.name()}}{% for error in form.name.errors %} {{error}}{% endfor %}</p>
+    <p>PassWords: </p><P>{{form.passwd()}}{% for error in form.passwd.errors %} {{error}}{% endfor %}</P>
+    {{form.submit()}}
+    </form>
+</div>
+{%endblock%}
